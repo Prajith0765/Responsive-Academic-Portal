@@ -1,13 +1,25 @@
 import { useState } from "react";
-
 import Rollno from "./Rollno";
 
 export default function Popup() {
     const [isOpen, setIsOpen] = useState(false);
+    const [isParentClicked, setIsParentClicked] = useState(false);
+    const [isStudentClicked, setIsStudentClicked] = useState(false);
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
     };
+
+    const handleParentButtonClick = () => {
+        setIsParentClicked(true);
+        setIsStudentClicked(false);
+    };
+
+    const handleStudentButtonClick = () => {
+        setIsStudentClicked(true);
+        setIsParentClicked(false);
+    };
+    
 
     return (
         <div className="fixed bottom-5 right-5">
@@ -21,17 +33,20 @@ export default function Popup() {
                         <div className="mb-9">
                             <h1 className="text-lg font-bold">Are you a Parent or Student?</h1>
                         </div>
-                        <div className="flex justify-between">
-                        <button className="bg-orange-500 hover:bg-blue-600 text-white font-bold py-4 px-9 rounded" onClick={Rollno}>Parent</button>
-                            <div className="mx-4"></div>
-                            <button className="bg-orange-500 hover:bg-blue-600 text-white font-bold py-2 px-9 rounded"><a href="/Rollno">Student</a></button>
-                        </div>
+                        {!isParentClicked && !isStudentClicked && (
+                            <div className="flex justify-between">
+                                <button className="bg-orange-500 hover:bg-blue-600 text-white font-bold py-4 px-9 rounded" onClick={handleParentButtonClick}>Parent</button>
+                                <div className="mx-4"></div>
+                                <button className="bg-orange-500 hover:bg-blue-600 text-white font-bold py-2 px-9 rounded" onClick={handleStudentButtonClick}>Student</button>
+                            </div>
+                        )}
                         
+                        {isStudentClicked && <Rollno/>}
+                        
+                        {isParentClicked && <Rollno />}
                     </div>
-                    
                 </div>
             )}
-
         </div>
     );
 }
