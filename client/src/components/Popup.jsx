@@ -28,7 +28,7 @@ export default function Popup() {
             </div>
             {isOpen && (
                 <div className="absolute bottom-0 right-0 m-4">
-                    <button className="absolute top-0 right-0" onClick={togglePopup}>X</button>
+                    <button className="absolute top-0 right-0 w-7" onClick={togglePopup}>X</button>
                     <div className="bg-white shadow-md rounded-lg p-4 w-96 h-96 flex flex-col justify-center items-center border border-gray-390">
                         
                         {!isParentClicked && !isStudentClicked && (
