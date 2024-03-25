@@ -21,16 +21,17 @@ const Home = () => {
         <a href="/" className="flex items-center gap-4">
           <img src="./public/mcet_logo.png" alt="Image" className="h-50 w-60" />
         </a>
-        <span className="">Affilated to Anna University<br/>An Autonomous Institute since 2011</span>
+        <span>Affilated to Anna University<br/>An Autonomous Institute since 2011</span>
         <img src="./public/code.png" alt="code" className="relative flex justify-right ml-10 h-24 w-24" />
       </header>
         </div>
-      <div className="slideshow-container flex justify-center">
+      <div className="slideshow-container flex items-center justify-center h-screen">
         {images.map((image, index) => (
           <div key={index} className={index === slideIndex ? "slideshow-slide block" : "slideshow-slide hidden"}>
-            <img src={image}  alt={`Slide ${index + 1}`} className=" h-10 w-400 " />
+            <img src={image}  alt={`Slide ${index + 1}`} className=" h-200 w-full flex items-center justify-center mt-48" />
           </div>
         ))}
+        <div className="h-20 w-10"></div>
       </div>
 
       <Popup />
