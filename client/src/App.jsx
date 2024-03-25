@@ -6,6 +6,8 @@ import Rollno from "./components/Rollno";
 import Main from "./components/Main";
 import Marks from "./components/Marks";
 import Attendance from "./components/Attendance";
+import Academic from "./components/Academic";
+import Coactivities from "./components/Coactivities";
 
 function App() {
 
@@ -19,6 +21,8 @@ function App() {
             <Route path="/" element={<Main/>}/>
             <Route path="/" element={<Marks/>}/>
             <Route path="/" element={<Attendance/>}/>
+            <Route path="/" element={<Academic/>}/>
+            <Route path="/" element={<Coactivities/>}/>
           </Route>
         </Route>
 
