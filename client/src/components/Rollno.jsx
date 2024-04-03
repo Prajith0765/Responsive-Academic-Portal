@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Popup from "./Popup";
 import Main from "./Main";
+import axios from "axios";
 
 export default function Rollno() {
   const [isBackClicked, setIsBackClicked] = useState(false);
@@ -17,6 +18,10 @@ export default function Rollno() {
       setIsBackClicked(false);
     }
   };
+  // eslint-disable-next-line no-unused-vars
+  function rollNumber(){
+    axios.get('http://localhost:5000/test');
+  }
 
   const navigate = useNavigate();
 
