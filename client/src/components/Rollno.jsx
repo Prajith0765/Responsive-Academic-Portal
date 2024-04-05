@@ -7,6 +7,7 @@ import axios from "axios";
 export default function Rollno() {
   const [isBackClicked, setIsBackClicked] = useState(false);
   const [isSubmitClicked, setIsSubmitClicked] = useState(false);
+  const [Rollno, setRollno] = useState("");
   const [error, setError] = useState(false); // State to track input error
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -49,6 +50,8 @@ export default function Rollno() {
           <input
             type="text"
             id="rollNumber"
+            value={Rollno}
+            onChange={ev => setRollno(ev.target.value)}
             className="border border-gray-300 rounded-md px-4 py-2 w-full mt-2 focus:outline-none focus:border-blue-500"
             onSubmit={login}
           />
