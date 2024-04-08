@@ -30,13 +30,19 @@ export default function Rollno() {
         setErrorMessage("An error occurred while fetching data. Please try again later."); // Set error message
       }
     }
-  };
+  }; 
  
-  function login(ev){
+  async function login(ev){
     ev.preventDefault();
-    axios.post('/rollno',{
-      Rollno,
-    });
+    try{
+      await axios.post('/rollno',{
+        Rollno,
+      });
+      alert("Login Successful");
+    } catch(e){
+      alert("Login Failed");
+    }
+    
   }
 
   const navigate = useNavigate();
