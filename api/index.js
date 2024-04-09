@@ -3,12 +3,14 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const User = require('./models/user.js');
 const jwt = require('jsonwebtoken');
+
 require('dotenv').config();
 
 const app = express();
 const jwtSecret = "gdfsdfsfgddaettuoghffs";
 
 app.use(express.json());
+
 
 app.use(cors({
     credentials: true,
@@ -42,7 +44,7 @@ app.post('/rollno', async (req, res) => {
         const token = jwt.sign({ Rollno: userDoc.Rollno, id: userDoc._id }, jwtSecret);
 
         // Set the token as a cookie
-        res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'strict' }).json({ message: "Token generated successfully" });
+        res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'strict' }).json(userDoc);
     } catch (error) {
         console.error('Error generating token:', error);
         res.status(500).json({ message: "Internal server error" });
@@ -52,3 +54,4 @@ app.post('/rollno', async (req, res) => {
 app.listen(5000, () => {
     console.log('Server is running on port 5000');
 });
+

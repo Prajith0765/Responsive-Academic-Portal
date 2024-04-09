@@ -10,13 +10,14 @@ import Academic from "./components/Academic";
 import Coactivities from "./components/Coactivities";
 import axios from "axios";
 
+
 axios.defaults.baseURL = 'http://localhost:5000';
 axios.defaults.withCredentials = true; 
 
 function App() {
 
   return (
-    
+   
     <Routes>
       
         <Route path="/" element={<Home/>}>
@@ -31,6 +32,7 @@ function App() {
         </Route>
 
     </Routes>
+    
   );
 }
 

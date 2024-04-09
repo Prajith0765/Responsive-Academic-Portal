@@ -3,9 +3,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Marks from "./Marks";
 import Attendance from "./Attendance";
-import Academic from "./Academic"
+import Academic from "./Academic";
 import Coactivities from "./Coactivities";
+
+
 export default function Main(){
+    
     const [isMarksClicked, setIsMarksClicked] = useState(false);
     const [isAttendanceClicked, setIsAttendanceClicked] = useState(false);
     const [isAcademicClicked, setIsAcademicClicked] = useState(false);
@@ -39,9 +42,9 @@ export default function Main(){
         setIsAcademicClicked(false);
     };
 
-    
     return(
         <div>
+            
             
             {!isMarksClicked && !isAttendanceClicked && !isAcademicClicked && !isCoactivitiesClicked && (
                 <><div className="flex flex-wrap justify-center gap-5">
@@ -55,13 +58,17 @@ export default function Main(){
                         <p className="ml-2"><a href="">For further details contact</a></p>
                     </div></>
             )}
+
+
             
 
                         {isMarksClicked && <Marks/>}
                         {isAttendanceClicked && <Attendance/>}
                         {isAcademicClicked && <Academic/>}
                         {isCoactivitiesClicked && <Coactivities/>}
+            
 
         </div>
+        
     );
 }

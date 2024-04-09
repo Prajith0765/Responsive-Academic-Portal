@@ -4,13 +4,15 @@ import Popup from "./Popup";
 import Main from "./Main";
 import axios from "axios";
 
+
+
 export default function Rollno() {
   const [isBackClicked, setIsBackClicked] = useState(false);
   const [isSubmitClicked, setIsSubmitClicked] = useState(false);
   const [Rollno, setRollno] = useState("");
   const [error, setError] = useState(false); // State to track input error
   const [errorMessage, setErrorMessage] = useState("");
-
+  
   const handleSubmitCLciked = async () => {
     const rollNumber = document.getElementById("rollNumber").value; // Get the value of roll number input
     if (!rollNumber) {
@@ -21,13 +23,16 @@ export default function Rollno() {
         const response = await axios.post('/rollno',{
           Rollno,
         });
+        alert('Login Successful');
         console.log(response.data); // Log response data
         setIsSubmitClicked(true);
         setIsBackClicked(false);
       } catch (error) {
+        
         console.error('Error fetching data:', error);
         setError(false); // Set error state to display error message
         setErrorMessage("An error occurred while fetching data. Please try again later."); // Set error message
+        alert('Login Failed');
       }
     }
   }; 
@@ -35,9 +40,10 @@ export default function Rollno() {
   async function login(ev){
     ev.preventDefault();
     try{
-      await axios.post('/rollno',{
+       await axios.post('/rollno',{
         Rollno,
       });
+      
       alert("Login Successful");
     } catch(e){
       alert("Login Failed");
