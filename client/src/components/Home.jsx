@@ -17,7 +17,9 @@ const Home = () => {
   return (
     <div>
         <div>
+          
       <header className="p-4 flex justify-center">
+        
         <a href="/" className="flex items-center gap-4">
           <img src="./public/mcet_logo.png" alt="Image" className="h-50 w-60" />
         </a>

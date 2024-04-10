@@ -23,7 +23,7 @@ export default function Rollno() {
         const response = await axios.post('/rollno',{
           Rollno,
         });
-        alert('Login Successful');
+        
         console.log(response.data); // Log response data
         setIsSubmitClicked(true);
         setIsBackClicked(false);
