@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const app = express();
+
 const jwtSecret = "gdfsdfsfgddaettuoghffs";
 
 app.use(express.json());
