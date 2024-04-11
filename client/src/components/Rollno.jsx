@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import Popup from "./Popup";
 import Main from "./Main";
 import axios from "axios";
@@ -36,7 +36,7 @@ export default function Rollno() {
       }
     }
   }; 
- 
+  
   async function login(ev){
     ev.preventDefault();
     try{
@@ -51,7 +51,7 @@ export default function Rollno() {
     
   }
 
-  const navigate = useNavigate();
+ 
 
   return (
     <div>
@@ -69,21 +69,13 @@ export default function Rollno() {
           />
           {error && <p className="text-red-500">Please enter your roll number.</p>} {/* Error message */}
           <button
-            className="bg-orange-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-orange-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded mt-3"
             onClick={handleSubmitCLciked}
             
           >
             Submit
           </button>
-          <button
-            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 ml-2"
-            onClick={() => {
-              navigate("/Popup");
-              
-            }}
-          >
-            Back
-          </button>
+          
         </div>
       )}
       {isBackClicked && <Popup />}
