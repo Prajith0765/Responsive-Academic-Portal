@@ -3,10 +3,19 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const User = require('./models/user.js');
 const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
+
+const UserModel = require('./models/user.js')
+
+
 
 require('dotenv').config();
+const app = express()
 
-const app = express();
+app.use(cookieParser());
+
+
+;
 
 const jwtSecret = "gdfsdfsfgddaettuoghffs";
 
@@ -33,6 +42,7 @@ app.get('/test', (req, res) => {
 console.log(process.env.MONGO_URL);
 
 app.post('/rollno', async (req, res) => {
+    
     const { Rollno } = req.body;
 
     try {
@@ -56,3 +66,22 @@ app.listen(5000, () => {
     console.log('Server is running on port 5000');
 });
 
+
+
+// Route to fetch user data
+app.get('/user-data', async (req, res) => {
+    try {
+        // Fetch user data including the Name field
+        const userData = await User.findOne({}, 'Name Rollno'); // Add 'Name' field to the projection
+
+        if (!userData) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Send the fetched user data as a JSON response
+        res.json(userData);
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});

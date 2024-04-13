@@ -1,12 +1,42 @@
+import { useState, useEffect } from 'react';
 
-export default function Marks(){
+export default function Marks() {
+    const [marks, setMarks] = useState({});
+
+    useEffect(() => {
+        fetchMarks();
+    }, []);
+
+    const fetchMarks = () => {
+        try {
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+            
+            const response =  fetch('http://localhost:5173', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
     
-    return(
+            if (!response.ok) {
+                throw new Error('Failed to fetch marks data');
+            }
+    
+            const data =  response.json();
+            setMarks(data);
+        } catch (error) {
+            console.error('Error fetching marks data:', error);
+        }
+    };
+    
+    return (
         <div>
-            Hi 
-            <div className="button-container">
-    <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded h-10 w-30 mt-64">Back</button>
-        </div>
+            <h1>Marks</h1>
+            <p>DSA: {marks.DSA}</p>
+            <p>CA: {marks.CA}</p>
+            <p>DBS: {marks.DBS}</p>
+            <p>CGPA: {marks.CGPA}</p>
         </div>
     );
 }
