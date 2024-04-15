@@ -1,11 +1,43 @@
+import axios from "axios";
+import { useState } from "react";
+
 export default function Coactivities(){
+    const [rollno, setRollno] = useState('');
+    const [userData, setUserData] = useState(null);
+    const [error, setError] = useState(null);
+
+    const handleRollnoChange = (event) => {
+        setRollno(event.target.value);
+    };
+
+    const fetchUserData = async () => {
+        try {
+            const response = await axios.get(`http://localhost:5000/coactivity/${rollno}`);
+            setUserData(response.data);
+            setError(null); // Clear any previous errors
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            setUserData(null);
+            setError('Error fetching user data'); // Set error message
+        }
+    };
 
     return(
         <div>
-            Co-Activities
-            <div className="button-container">
-                <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded h-10 w-30 mt-64">Back</button>
+            <h1 >Coactivites</h1>
+            <div>
+                <label>Enter Rollno:</label>
+                <input type="text" value={rollno} onChange={handleRollnoChange} />
+                <button onClick={fetchUserData}>Fetch Data</button>
             </div>
+            {userData && (
+                <div>
+                    <p>Co-Activities: {userData['Co-activities']}</p>
+                </div>
+            )}
+            {error && <p>{error}</p>}
+            
+            
         </div>
     );
 }

@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 export default function Marks() {
     const [marks, setMarks] = useState({});
 
+    
+
     useEffect(() => {
         fetchMarks();
     }, []);
@@ -37,6 +39,8 @@ export default function Marks() {
             <p>CA: {marks.CA}</p>
             <p>DBS: {marks.DBS}</p>
             <p>CGPA: {marks.CGPA}</p>
+            
+            
         </div>
     );
 }
