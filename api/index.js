@@ -102,6 +102,20 @@ app.get('/coactivity/:rollno',async (req,res) => {
     }
 });
 
+/*app.get('/OTPverify/:rollno',async (req,res) => {
+    try {
+        const rollno = req.params.rollno;
+        const userData = await User.findOne({Rollno : rollno});
+        if(!userData) {
+            return res.status(404).json({message :"User not found"});
+        }
+        res.json(userData);
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});  */
+
 app.listen(5000, () => {
     console.log('Server is running on port 5000');
 });

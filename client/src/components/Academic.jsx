@@ -2,11 +2,14 @@ import{ useState } from 'react';
 import axios from 'axios';
 
 
+
+
+
 export default function Academic() {
     const [rollno, setRollno] = useState('');
     const [userData, setUserData] = useState(null);
     const [error, setError] = useState(null);
-
+   
     
 
     const handleRollnoChange = (event) => {
@@ -37,7 +40,7 @@ export default function Academic() {
                 <div>
                     <p>Name: {userData.Name}</p>
                     <p>Rollno: {userData.Rollno}</p>
-                    {/* Display other fields as needed */}
+                    <p>Academic Performance: {userData.AcademicPerformance}</p>
                 </div>
             )}
             {error && <p>{error}</p>}

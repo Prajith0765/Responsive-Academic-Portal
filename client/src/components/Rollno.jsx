@@ -1,8 +1,10 @@
 import { useState } from "react";
 
 import Popup from "./Popup";
-import Main from "./Main";
+//import Main from "./Main";
 import axios from "axios";
+import OTPverify from "./OTPverify";
+
 
 
 
@@ -12,6 +14,7 @@ export default function Rollno() {
   const [Rollno, setRollno] = useState("");
   const [error, setError] = useState(false); // State to track input error
   const [errorMessage, setErrorMessage] = useState("");
+  
   
   const handleSubmitCLciked = async () => {
     const rollNumber = document.getElementById("rollNumber").value; // Get the value of roll number input
@@ -80,7 +83,7 @@ export default function Rollno() {
       )}
       {isBackClicked && <Popup />}
 
-      {isSubmitClicked && <Main />}
+      {isSubmitClicked && <OTPverify/>}
     </div>
   );
 }

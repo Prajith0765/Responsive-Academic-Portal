@@ -1,44 +1,49 @@
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
+import axios from 'axios';
 
 export default function Marks() {
-    const [marks, setMarks] = useState({});
+    
+    const [rollno, setRollno] = useState('');
+    const [userData, setUserData] = useState(null);
+    const [error, setError] = useState(null);
 
     
 
-    useEffect(() => {
-        fetchMarks();
-    }, []);
+    const handleRollnoChange = (event) => {
+        setRollno(event.target.value);
+    };
 
-    const fetchMarks = () => {
+    const fetchUserData = async () => {
         try {
-            const token = localStorage.getItem('token');
-            console.log('Token:', token);
-            
-            const response =  fetch('http://localhost:5173', {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-    
-            if (!response.ok) {
-                throw new Error('Failed to fetch marks data');
-            }
-    
-            const data =  response.json();
-            setMarks(data);
+            const response = await axios.get(`http://localhost:5000/academic/${rollno}`);
+            setUserData(response.data);
+            setError(null); // Clear any previous errors
         } catch (error) {
-            console.error('Error fetching marks data:', error);
+            console.error('Error fetching user data:', error);
+            setUserData(null);
+            setError('Error fetching user data'); // Set error message
         }
     };
+
     
     return (
         <div>
             <h1>Marks</h1>
-            <p>DSA: {marks.DSA}</p>
-            <p>CA: {marks.CA}</p>
-            <p>DBS: {marks.DBS}</p>
-            <p>CGPA: {marks.CGPA}</p>
+            <div>
+                <label>Enter Rollno:</label>
+                <input type="text" value={rollno} onChange={handleRollnoChange} />
+                <button onClick={fetchUserData}>Fetch Data</button>
+            </div>
+            {userData && (
+                <div>
+                    <p>Name: {userData.Name}</p>
+                    <p>DSA: {userData.DSA}</p>
+                    <p>CA: {userData.CA}</p>
+                    <p>DBS: {userData.DBS}</p>
+                    <h3>CGPA: {userData.CGPA}</h3>
+                </div>
+            )}
+            {error && <p>{error}</p>}
             
             
         </div>
