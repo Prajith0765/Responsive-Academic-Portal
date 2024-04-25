@@ -1,13 +1,18 @@
 import { useState } from "react";
 import axios from "axios";
+import Main from "./Main";
 
 
 export default function Attendance(){
     const [rollno, setRollno] = useState('');
     const [userData, setUserData] = useState(null);
     const [error, setError] = useState(null);
-
+    const [isBackClicked, setIsBackClicked] = useState(false);
     
+
+    const handleBackButtonClick = () => {
+        setIsBackClicked(true);
+    };
 
     const handleRollnoChange = (event) => {
         setRollno(event.target.value);
@@ -27,7 +32,11 @@ export default function Attendance(){
     
     return(
         <div>
-            Attendance 
+            
+            {!isBackClicked && (
+                
+            <div>
+                <h2>Attendance</h2>
             <div>
                 <label>Enter Rollno:</label>
                 <input type="text" value={rollno} onChange={handleRollnoChange} />
@@ -43,6 +52,16 @@ export default function Attendance(){
                 </div>
             )}
             {error && <p>{error}</p>}
+            
+            <button
+                        className="bg-orange-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded mt-3"
+                        onClick={handleBackButtonClick}
+                    >
+                        Back
+                    </button>
+                    </div>
+            )}
+            {isBackClicked && <Main/>}
              
         </div>
     );

@@ -1,10 +1,16 @@
 import axios from "axios";
 import { useState } from "react";
+import Main from "./Main";
 
 export default function Coactivities(){
     const [rollno, setRollno] = useState('');
     const [userData, setUserData] = useState(null);
     const [error, setError] = useState(null);
+    const [isBackClicked, setIsBackClicked] = useState(false);
+
+    const handleBackButtonClick = () => {
+        setIsBackClicked(true);
+    };
 
     const handleRollnoChange = (event) => {
         setRollno(event.target.value);
@@ -24,7 +30,10 @@ export default function Coactivities(){
 
     return(
         <div>
-            <h1 >Coactivites</h1>
+            
+            {!isBackClicked && (
+            <div>
+                <h1 >Coactivites</h1>
             <div>
                 <label>Enter Rollno:</label>
                 <input type="text" value={rollno} onChange={handleRollnoChange} />
@@ -37,6 +46,16 @@ export default function Coactivities(){
             )}
             {error && <p>{error}</p>}
             
+
+            <button
+                        className="bg-orange-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded mt-3"
+                        onClick={handleBackButtonClick}
+                    >
+                        Back
+                    </button>
+                    </div>
+            )}
+            {isBackClicked && <Main/>}
             
         </div>
     );
