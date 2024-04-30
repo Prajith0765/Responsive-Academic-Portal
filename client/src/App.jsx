@@ -15,6 +15,7 @@ import { UserContextProvider } from "./UserContext";
 
 
 axios.defaults.baseURL = 'http://localhost:5000';
+
 axios.defaults.withCredentials = true; 
 
 function App() {
