@@ -5,6 +5,8 @@ import Marks from "./Marks";
 import Attendance from "./Attendance";
 import Academic from "./Academic";
 import Coactivities from "./Coactivities";
+//import { UserContext } from "../UserContext";
+//import Rollno from './Rollno';
 
 
 export default function Main(){
@@ -13,6 +15,7 @@ export default function Main(){
     const [isAttendanceClicked, setIsAttendanceClicked] = useState(false);
     const [isAcademicClicked, setIsAcademicClicked] = useState(false);
     const [isCoactivitiesClicked, setIsCoactivitiesClicked] = useState(false);
+    
 
     const handleMarksButtonClick = () => {
         setIsMarksClicked(true);

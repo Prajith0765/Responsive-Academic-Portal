@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import Popup from "./Popup";
 //import Main from "./Main";
 import axios from "axios";
 import OTPverify from "./OTPverify";
+import { UserContext } from "../UserContext";
 
 
 
@@ -14,6 +15,7 @@ export default function Rollno() {
   const [Rollno, setRollno] = useState("");
   const [error, setError] = useState(false); // State to track input error
   const [errorMessage, setErrorMessage] = useState("");
+  const {setUser} = useContext(UserContext);
   
   
   const handleSubmitCLciked = async () => {
@@ -21,12 +23,14 @@ export default function Rollno() {
     if (!rollNumber) {
       setError(true); // Set error state if input is empty
     }else {
+      
       try {
         // Make Axios GET request
         const response = await axios.post('/rollno',{
           Rollno,
         });
-        
+        setUser(response.data);
+        console.log(response.data.Rollno)
         console.log(response.data); // Log response data
         setIsSubmitClicked(true);
         setIsBackClicked(false);

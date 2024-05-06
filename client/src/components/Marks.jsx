@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import axios from 'axios';
 import Main from './Main';
+import { UserContext } from '../UserContext';
 
 export default function Marks() {
 
@@ -8,6 +9,7 @@ export default function Marks() {
     const [userData, setUserData] = useState(null);
     const [error, setError] = useState(null);
     const [isBackClicked, setIsBackClicked] = useState(false);
+    const {user} = useContext(UserContext);
 
     const handleBackButtonClick = () => {
         setIsBackClicked(true);
@@ -39,6 +41,13 @@ export default function Marks() {
                         <input type="text" value={rollno} onChange={handleRollnoChange} />
                         <button onClick={fetchUserData}>Fetch Data</button>
                     </div>
+                    {
+                        user &&(
+                            <div>
+                                Rollno: {user.Name}
+                            </div>
+                        )
+                    }
                     {userData && (
                         <div>
                             <p>Name: {userData.Name}</p>

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 import PropTypes from "prop-types";
 import {  RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import {auth} from "./FireBase";
@@ -14,9 +14,9 @@ UserContextProvider.propTypes = {
   };
 
 
-export function UserContextProvider({children, rollno}){
+export function UserContextProvider({children}){
 
-    const [user, setUser] = useState(rollno);
+    const [user, setUser] = useState(null);
     
     function setUpRecaptcha(number){
         const recaptchaVerifier = new RecaptchaVerifier(
@@ -38,3 +38,7 @@ export function UserContextProvider({children, rollno}){
         </UserContext.Provider>  
     );
 }
+
+export function useUserAuth() {
+    return useContext(UserContext);
+  }

@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "react-phone-input-2": "^2.15.1"
   }
 }

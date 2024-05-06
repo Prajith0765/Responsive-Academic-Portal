@@ -1,6 +1,7 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import Main from "./Main";
-import { UserContext } from "../UserContext";
+//import { UserContext } from "../UserContext";
+import {useUserAuth} from "../UserContext";
 
 export default function OTPverify() {
     const [isSubmitClicked, setIsSubmitClicked] = useState(false);
@@ -8,7 +9,7 @@ export default function OTPverify() {
     const [errorMessage, setErrorMessage] = useState("");
     const [OTP, setOTP] = useState("");
     const [number, setNumber] = useState("");
-    const { setUpRecaptcha } = useContext(UserContext);
+    const { setUpRecaptcha } = useUserAuth();
 
     const handleSubmitButtonClick = () => {
         setIsSubmitClicked(true);
