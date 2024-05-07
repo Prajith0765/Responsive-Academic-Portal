@@ -1,13 +1,11 @@
 import { useContext, useState } from "react";
-// eslint-disable-next-line no-unused-vars
-import { useNavigate } from "react-router-dom";
+
 import Marks from "./Marks";
 import Attendance from "./Attendance";
 import Academic from "./Academic";
 import Coactivities from "./Coactivities";
 import { UserContext } from "../UserContext";
-//import { UserContext } from "../UserContext";
-//import Rollno from './Rollno';
+
 
 
 export default function Main(){

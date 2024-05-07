@@ -64,57 +64,9 @@ app.post('/rollno', async (req, res) => {
 
 
 
-// Route to fetch user data by Rollno
-app.get('/academic/:rollno', async (req, res) => {
-    try {
-        const rollno = req.params.rollno;
-
-        // Query the database for user data based on Rollno
-        const userData = await User.findOne({ Rollno: rollno });
-  
-        if (!userData) {
-            // If user data not found, return 404 Not Found status with an error message
-            return res.status(404).json({ message: "User not found" });
-        }
-
-        // If user data found, send it as a JSON response
-        res.json(userData);
-    } catch (error) {
-        // If an error occurs, return 500 Internal Server Error status with an error message
-        console.error('Error fetching user data:', error);
-        res.status(500).json({ message: "Internal server error" });
-    }
-    
-});
 
 
-app.get('/coactivity/:rollno',async (req,res) => {
-    try {
-        const rollno = req.params.rollno;
-        const userData = await User.findOne({Rollno : rollno});
-        if(!userData) {
-            return res.status(404).json({message :"User not found"});
-        }
-        res.json(userData);
-    } catch (error) {
-        console.error('Error fetching user data:', error);
-        res.status(500).json({ message: "Internal server error" });
-    }
-});
 
-/*app.get('/OTPverify/:rollno',async (req,res) => {
-    try {
-        const rollno = req.params.rollno;
-        const userData = await User.findOne({Rollno : rollno});
-        if(!userData) {
-            return res.status(404).json({message :"User not found"});
-        }
-        res.json(userData);
-    } catch (error) {
-        console.error('Error fetching user data:', error);
-        res.status(500).json({ message: "Internal server error" });
-    }
-});  */
 
 app.listen(5000, () => {
     console.log('Server is running on port 5000');
