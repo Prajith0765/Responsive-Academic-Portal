@@ -1,13 +1,12 @@
 import { useContext, useState } from 'react';
-import axios from 'axios';
+//import axios from 'axios';
 import Main from './Main';
 import { UserContext } from '../UserContext';
 
 export default function Marks() {
 
-    const [rollno, setRollno] = useState('');
-    const [userData, setUserData] = useState(null);
-    const [error, setError] = useState(null);
+    
+    const [error] = useState(null);
     const [isBackClicked, setIsBackClicked] = useState(false);
     const {user} = useContext(UserContext);
 
@@ -15,46 +14,24 @@ export default function Marks() {
         setIsBackClicked(true);
     };
 
-    const handleRollnoChange = (event) => {
-        setRollno(event.target.value);
-    };
-
-    const fetchUserData = async () => {
-        try {
-            const response = await axios.get(`http://localhost:5000/academic/${rollno}`);
-            setUserData(response.data);
-            setError(null); // Clear any previous errors
-        } catch (error) {
-            console.error('Error fetching user data:', error);
-            setUserData(null);
-            setError('Error fetching user data'); // Set error message
-        }
-    };
+   
 
     return (
         <div>
             {!isBackClicked && (
                 <div>
-                    <h1>Marks</h1>
-                    <div>
-                        <label>Enter Rollno:</label>
-                        <input type="text" value={rollno} onChange={handleRollnoChange} />
-                        <button onClick={fetchUserData}>Fetch Data</button>
-                    </div>
-                    {
-                        user &&(
-                            <div>
-                                Rollno: {user.Name}
-                            </div>
-                        )
-                    }
-                    {userData && (
+                    
+                    
+                   
+                    {user && (
                         <div>
-                            <p>Name: {userData.Name}</p>
-                            <p>DSA: {userData.DSA}</p>
-                            <p>CA: {userData.CA}</p>
-                            <p>DBS: {userData.DBS}</p>
-                            <h3>CGPA: {userData.CGPA}</h3>
+                            <p className="text-lg font-bold">Name: {user.Name}</p>
+                            <p className="text-lg font-bold" >Rollno: {user.Rollno}</p>
+                            <h1 className="text-lg font-bold mb-10">Marks</h1>
+                            <p className="text-lg  mb-2">DSA: {user.DSA}</p>
+                            <p className="text-lg  mb-2">CA: {user.CA}</p>
+                            <p className="text-lg  mb-2">DBS: {user.DBS}</p>
+                            <h3 className="text-lg font-bold mb-2">CGPA: {user.CGPA}</h3>
                         </div>
                     )}
                     {error && <p>{error}</p>}

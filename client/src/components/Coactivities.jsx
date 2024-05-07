@@ -1,47 +1,34 @@
-import axios from "axios";
-import { useState } from "react";
+//import axios from "axios";
+import { useContext, useState } from "react";
 import Main from "./Main";
+import { UserContext } from "../UserContext";
 
 export default function Coactivities(){
-    const [rollno, setRollno] = useState('');
-    const [userData, setUserData] = useState(null);
-    const [error, setError] = useState(null);
+    
+    const [error] = useState(null);
     const [isBackClicked, setIsBackClicked] = useState(false);
+    const {user} = useContext(UserContext);
 
     const handleBackButtonClick = () => {
         setIsBackClicked(true);
     };
 
-    const handleRollnoChange = (event) => {
-        setRollno(event.target.value);
-    };
+    
 
-    const fetchUserData = async () => {
-        try {
-            const response = await axios.get(`http://localhost:5000/coactivity/${rollno}`);
-            setUserData(response.data);
-            setError(null); // Clear any previous errors
-        } catch (error) {
-            console.error('Error fetching user data:', error);
-            setUserData(null);
-            setError('Error fetching user data'); // Set error message
-        }
-    };
-
+    
     return(
         <div>
             
             {!isBackClicked && (
             <div>
-                <h1 >Coactivites</h1>
-            <div>
-                <label>Enter Rollno:</label>
-                <input type="text" value={rollno} onChange={handleRollnoChange} />
-                <button onClick={fetchUserData}>Fetch Data</button>
-            </div>
-            {userData && (
+                
+            
+            {user && (
                 <div>
-                    <p>Co-Activities: {userData['Co-activities']}</p>
+                    <p className="text-lg font-bold ">Name:{user.Name}</p>
+                    <p className="text-lg font-bold ">Rollno: {user.Rollno}</p>
+                    <h1 className="text-lg font-bold mb-10" >Co-Activites</h1>
+                    <p className="text-lg font-bold mb-5">{user['Co-activities']}</p>
                 </div>
             )}
             {error && <p>{error}</p>}

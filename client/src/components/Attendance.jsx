@@ -1,34 +1,22 @@
-import { useState } from "react";
-import axios from "axios";
+import { useContext, useState } from "react";
+//import axios from "axios";
 import Main from "./Main";
+import { UserContext } from "../UserContext";
 
 
 export default function Attendance(){
-    const [rollno, setRollno] = useState('');
-    const [userData, setUserData] = useState(null);
-    const [error, setError] = useState(null);
+   
+    const [error] = useState(null);
     const [isBackClicked, setIsBackClicked] = useState(false);
-    
+    const {user} = useContext(UserContext);
 
     const handleBackButtonClick = () => {
         setIsBackClicked(true);
     };
 
-    const handleRollnoChange = (event) => {
-        setRollno(event.target.value);
-    };
+    
 
-    const fetchUserData = async () => {
-        try {
-            const response = await axios.get(`http://localhost:5000/academic/${rollno}`);
-            setUserData(response.data);
-            setError(null); // Clear any previous errors
-        } catch (error) {
-            console.error('Error fetching user data:', error);
-            setUserData(null);
-            setError('Error fetching user data'); // Set error message
-        }
-    };
+    
     
     return(
         <div>
@@ -36,19 +24,17 @@ export default function Attendance(){
             {!isBackClicked && (
                 
             <div>
-                <h2>Attendance</h2>
-            <div>
-                <label>Enter Rollno:</label>
-                <input type="text" value={rollno} onChange={handleRollnoChange} />
-                <button onClick={fetchUserData}>Fetch Data</button>
-            </div>
-            {userData && (
+                
+            
+            {user && (
                 <div>
-                    <p>Name: {userData.Name}</p>
-                    <p>DSA Attendence: {userData.DSAatt}</p>
-                    <p>CA Attendence: {userData.CAatt}</p>
-                    <p>DBS Attendence: {userData.DBSatt}</p>
-                    <h3>Overall Attendence: {userData.Attendence}</h3>
+                    <p className="text-lg font-bold ">Name: {user.Name}</p>
+                    <p className="text-lg font-bold " >Rollno: {user.Rollno}</p>
+                    <h2 className="text-lg font-bold mb-10">Attendance</h2>
+                    <p className="text-lg mb-2">DSA Attendence: {user.DSAatt}</p>
+                    <p className="text-lg mb-2">CA Attendence: {user.CAatt}</p>
+                    <p className="text-lg mb-2">DBS Attendence: {user.DBSatt}</p>
+                    <h3 className="text-lg font-bold mb-2">Overall Attendence: {user.Attendence}</h3>
                 </div>
             )}
             {error && <p>{error}</p>}
