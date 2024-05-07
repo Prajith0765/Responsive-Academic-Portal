@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Main from "./Main";
-//import { UserContext } from "../UserContext";
+import { UserContext } from "../UserContext";
 import {useUserAuth} from "../UserContext";
 
 export default function OTPverify() {
@@ -8,8 +8,9 @@ export default function OTPverify() {
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [OTP, setOTP] = useState("");
-    const [number, setNumber] = useState("");
+    
     const { setUpRecaptcha } = useUserAuth();
+    const {user} = useContext(UserContext);
 
     const handleSubmitButtonClick = () => {
         setIsSubmitClicked(true);
@@ -19,17 +20,15 @@ export default function OTPverify() {
     const getOTP = async (e) => {
         e.preventDefault();
         setError("");
-        if (number === "") {
-            return setError("Enter the number");
-        }
+        
         try {
-            const response = await setUpRecaptcha(number);
+            const response = await setUpRecaptcha(user.Mobilenumber);
             console.log(response);
             // Handle response if necessary
         } catch (err) {
             setError(err.message);
         }
-        console.log(number);
+        
     };
 
     const verifyOTP = async (e) => {
@@ -43,16 +42,7 @@ export default function OTPverify() {
         <div>
             {!isSubmitClicked && (
                 <div>
-                    <div className="mb-4">
-                        <p className="text-lg font-semibold">Enter the number</p>
-                        <input
-                            type="number"
-                            id="number"
-                            value={number}
-                            onChange={(ev) => setNumber(ev.target.value)}
-                            className="border border-gray-300 rounded-md px-4 py-2 w-full mt-1 focus:outline-none focus:border-blue-500"
-                        />
-                    </div>
+                    
                     <button
                         className="bg-orange-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded mt-3"
                         onClick={getOTP}

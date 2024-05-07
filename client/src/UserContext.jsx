@@ -4,7 +4,6 @@ import {  RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import {auth} from "./FireBase";
 
 
-
 export const UserContext = createContext({});
 
 UserContextProvider.propTypes = {
@@ -15,18 +14,20 @@ UserContextProvider.propTypes = {
 
 
 export function UserContextProvider({children}){
-
+    
     const [user, setUser] = useState(null);
     
-    function setUpRecaptcha(number){
+    function setUpRecaptcha(number) {
         const recaptchaVerifier = new RecaptchaVerifier(
-            "recaptcha-container",
-              {},
-              auth
-            );
-            recaptchaVerifier.render();
-            return signInWithPhoneNumber(auth, number, recaptchaVerifier);
-        }
+            auth,
+          "recaptcha-container",
+          {},
+          
+        );
+        recaptchaVerifier.render();
+        console.log(number);
+        return signInWithPhoneNumber(auth, number, recaptchaVerifier);
+      }
         
     
    
