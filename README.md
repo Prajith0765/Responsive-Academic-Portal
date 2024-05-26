@@ -1,3 +1,4 @@
+This project is build on MERN stack.
 The Responsive Academic Portal project is to create a safe, user-friendly portal for staff, parents, and 
 students in order to improve communication and information exchange in educational institutions. 
 User-friendly buttons allow users to pick staff, parent, or student. When parents enter their child's roll 
